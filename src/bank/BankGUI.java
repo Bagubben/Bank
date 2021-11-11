@@ -3,6 +3,7 @@ package bank;
 import static bank.Bank.closeAccount;
 import static bank.Bank.deposit;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -16,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -35,10 +37,10 @@ public class BankGUI extends Bank
         JFrame customerScreen = new JFrame("Admin");
         customerScreen.setSize(900, 575);
         customerScreen.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 40));
-
+        
         //Rightside Panel-----------------------------------------------------------
         JPanel rightSidePanel = new JPanel();
-        rightSidePanel.setPreferredSize(new Dimension(450, 385));
+        rightSidePanel.setPreferredSize(new Dimension(450, 400));
         rightSidePanel.setLayout(new BorderLayout());
 
         //Account List--------------------------------------------------------------
@@ -88,7 +90,12 @@ public class BankGUI extends Bank
             @Override
             public void actionPerformed(ActionEvent arg0)
             {
-                System.out.println("btnAddCustomer.addActionListener");
+                customerScreen.remove(leftSidePanel);
+                customerScreen.remove(rightSidePanel);
+                customerScreen.add(NewCustomerPanel());
+                customerScreen.setVisible(false);
+                customerScreen.setVisible(true);
+                
             }
         });
 
@@ -142,6 +149,54 @@ public class BankGUI extends Bank
         customerScreen.setVisible(true);
 
     }
+        //Adding a new customer panel to JFrame-------------------------------------
+    public JPanel NewCustomerPanel()
+    {
+        
+        JPanel newCustomerPanel = new JPanel();
+        newCustomerPanel.setBackground(Color.green);
+        newCustomerPanel.setPreferredSize(new Dimension(450, 400));
+        newCustomerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
+        JLabel lblNewCustomerPanel = new JLabel("New Customer");
+        lblNewCustomerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        lblNewCustomerPanel.setPreferredSize(new Dimension(300, 65));
+        JLabel lblFirtName = new JLabel("First name");
+        lblFirtName.setPreferredSize(new Dimension(200, 65));
+        JLabel lblLastName = new JLabel("Last name");
+        lblLastName.setPreferredSize(new Dimension(200, 65));
+        JLabel lblSSN = new JLabel("SSN");
+        lblSSN.setPreferredSize(new Dimension(200, 65));
+        
+        JTextField firstNameField = new JTextField();
+        firstNameField.setPreferredSize(new Dimension(200, 40));
+        
+        JTextField lastNameField = new JTextField();
+        lastNameField.setPreferredSize(new Dimension(200, 40));
+        
+        JTextField ssnField = new JTextField();
+        ssnField.setPreferredSize(new Dimension(200, 40));
+        
+        newCustomerPanel.add(lblNewCustomerPanel);
+        newCustomerPanel.add(lblFirtName);
+        newCustomerPanel.add(firstNameField);
+        newCustomerPanel.add(lblLastName);
+        newCustomerPanel.add(lastNameField);
+        newCustomerPanel.add(lblSSN);
+        newCustomerPanel.add(ssnField);
+        newCustomerPanel.setVisible(true);
+        return newCustomerPanel;
+        
+    }  
+        //Modal credit error JFrame-------------------------------------------------
+    public void CreditAccountError()
+    {
+    
+    }
+        //Modal savings error JFrame------------------------------------------------
+    public void SavingsAccountError()
+    {
+    
+    }
 
     public void LOAD_CUSTOMER(Customer customer)
     {
@@ -156,7 +211,7 @@ public class BankGUI extends Bank
         rightSidePanel.setLayout(new BorderLayout());
 
         //Account List--------------------------------------------------------------
-        JLabel lblAccountList = new JLabel("Account Typ" + " ".repeat(28) + "AccountNumber"
+        JLabel lblAccountList = new JLabel("Account Type" + " ".repeat(28) + "AccountNumber"
                 + " ".repeat(21) + "Balance");
 
         JList<String> lstAccountList = new JList<>();

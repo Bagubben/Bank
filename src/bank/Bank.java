@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import javax.swing.JPanel;
 
 public class Bank
 {
@@ -24,7 +25,8 @@ public class Bank
         customerList = createCustomerList();
 
         BankGUI b = new BankGUI();
-        b.CUSTOMER_SCREEN(customerList.get(0));
+        b.ADMIN_SCREEN();
+        b.NewCustomerPanel();
     }
 
     private static ArrayList<Customer> createCustomerList() throws FileNotFoundException, IOException
